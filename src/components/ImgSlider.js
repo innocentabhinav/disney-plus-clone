@@ -28,14 +28,6 @@ function ImgSlider() {
 
   return (
     <Carousel {...settings}>
-      {/* <Wrap>
-        <img src="/images/slider-badging.jpg" alt="" />
-      </Wrap>
-
-      <Wrap>
-        <img src="/images/slider-badag.jpg" alt="" />
-      </Wrap> */}
-
       {sliders}
     </Carousel>
   )
@@ -46,7 +38,7 @@ export default ImgSlider
 const Carousel = styled(Slider)`
 margin-top:20px;
 width:95vw;
-margin-left: 30px;
+margin-left: 31px;
 
 
 ul li button{
@@ -69,25 +61,25 @@ button{
 }
 
 `
-const Wrap = styled.div`
-cursor:pointer;
+// const Wrap = styled.div`
+// cursor:pointer;
 
 
-   img {
-    margin-left: 16px;
-    border: 4px solid transparent;
-    border-radius:4px;
-    width:99%;
-    height:100%;
-    box-shadow: rgb(0 0 0 /69%) 0px 26px 30px -10px,
-    rgb(0 0 0 /73%) 0px 16px 10px -10px;
-    transition-duration: 300ms;
+//    img {
+//     margin-left: 16px;
+//     border: 4px solid transparent;
+//     border-radius:4px;
+//     width:99%;
+//     height:100%;
+//     box-shadow: rgb(0 0 0 /69%) 0px 26px 30px -10px,
+//     rgb(0 0 0 /73%) 0px 16px 10px -10px;
+//     transition-duration: 300ms;
 
-   &:hover {
-    border:4px solid rgba(249,249 ,249,0.8);
+//    &:hover {
+//     border:4px solid rgba(249,249 ,249,0.8);
 
-   }
+//    }
 
-}
+// }
 
-`
+// `
