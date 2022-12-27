@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import Fade from 'react-reveal';
+// import Fade from 'react-reveal';
 import styled from 'styled-components';
-// import Fade from 'react-reveal/Fade';
+import Fade from 'react-reveal/Fade';
+import { Link } from 'react-router-dom';
 
 function RecommendedMovie(props) {
 
@@ -17,14 +18,27 @@ function RecommendedMovie(props) {
     const image = props.imageURL;
     const id = props.id;
     const name = props.name;
+console.log('type',mediaType);
+    const stateToPass = {
+    overview:overview,
+    year:year,
+    mediaType:mediaType,
+    poster:image,
+    name:name,
+    id:id,
+    key:""
+    }
 
     return (
+     <Link to={`/home/detail/${id}`} state={stateToPass}>
+
         <Container onMouseOver={mouseOverHandle} onMouseOut={mouseOutHandle}>
             <img src={props.imageURL} />
-
+            <div className="beautification">
+          </div>
             {isHovering && (
                 <MovieDetail>
-                    <Fade bottom duration={100}>
+                    <Fade bottom duration={500}>
                         <Wrapper>
                             <div className="name-div">
                                 {props.name} <span>|</span>
@@ -47,6 +61,7 @@ function RecommendedMovie(props) {
             }
         </Container>
 
+        </Link>
     )
 }
 
@@ -80,6 +95,15 @@ img {
     object-fit: cover;
 }
 
+.beautification {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: inset 0 -100px 55px -30px rgba(14, 14, 14, 0.95);
+  }
+
 `
 
 const MovieDetail = styled.div`
@@ -93,7 +117,7 @@ height: 80px;
 display: flex;
 align-items: center;
 color: rgba(244,234,234,0.87);
-/* box-shadow: insert 0 -100px 56px -30px rgba(14 ,14, 14 ,0.95); */
+
 
 `
 
@@ -112,7 +136,9 @@ align-items: center;
     font-weight: 506;
     font-size: 19px;
     white-space: pre-line;
-    span{
+   
+
+    span {
         margin-left: 3px;
         vertical-align: center;
         font-size: 17px;
@@ -146,7 +172,7 @@ align-items: center;
     display: flex;
     justify-content: center;
 
-    p{
+    p {
         font-size: 17.5px;
         letter-spacing: 1.5px;
         margin-top: 20px;

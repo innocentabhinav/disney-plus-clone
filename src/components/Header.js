@@ -101,7 +101,8 @@ a{
 
 const UserImg = styled.img`
 width:48px;
-heigth:48px;
+height:48px;
 border-radius:50%;
 
 `
+

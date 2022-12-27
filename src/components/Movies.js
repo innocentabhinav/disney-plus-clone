@@ -35,7 +35,7 @@ function Movies() {
         const mediaType=card.media_type;
         const year=card.release_date;
         const id=card.id;
-
+          console.log('type in mv ', mediaType);
         return (
 
             <RecommendedMovie
