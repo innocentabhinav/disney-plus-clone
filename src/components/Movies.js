@@ -30,13 +30,22 @@ function Movies() {
             name = card.original_name;
           }
         const image = getImageURL(card.poster_path)
-
+        const rating=card.vote_average.toFixed(2);
+        const description=card.overview;
+        const mediaType=card.media_type;
+        const year=card.release_date;
+        const id=card.id;
 
         return (
 
             <RecommendedMovie
-            imageURL={getImageURL(card.poster_path)}
-
+                imageURL={getImageURL(card.poster_path)}
+                name={name}
+                rating={rating}
+                description={description}
+                mediaType={mediaType}
+                year={year}
+                id={id}
             />
         )
         
