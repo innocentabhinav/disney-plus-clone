@@ -7,6 +7,8 @@ import {movieData} from '../sliderData'
 import SliderCard from './SliderCard';
 
 function ImgSlider() {
+  console.log("hello")
+  console.log('movie data : ', movieData);
   let settings = {
     dots: true,
     infinte: true,
@@ -22,6 +24,12 @@ function ImgSlider() {
       <SliderCard 
       id={slider.id}
       bgImg={slider.bgImg}
+      poster={slider.poster}
+      mediaType={slider.mediaType}
+      overview={slider.overview}
+      year={slider.year}
+      name={slider.name}
+      trailerKey={slider.key}
       />
     )
   })

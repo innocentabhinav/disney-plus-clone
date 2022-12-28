@@ -14,7 +14,7 @@ function Detail() {
     const mediaType = state.mediaType;
     const name = state.name;
     const id = state.id;
-    // console.log(mediaType);
+    // console.log(mediaType);ṭ
     const temp = state?.trailerKey;
 
     let movieKey;
@@ -38,10 +38,10 @@ function Detail() {
     movieKey = officialTrailer?.key;
 
     if (
-        (id == '1') ||
-        (id == '2') ||
-        (id == '3') ||
-        (id == '4')
+        (id== '1') ||
+        (id== '2') ||
+        (id== '3') ||
+        (id== '4')
     ) {
         movieKey = temp;
     }

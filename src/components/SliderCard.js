@@ -1,16 +1,38 @@
 import React from 'react'
 import styled from 'styled-components'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function SliderCard(props) {
 
+  const overview=props.overview;
+  const year=props.year;
+  const mediaType=props.mediaType;
+  const image=props.poster;
+  const id=props.id;
+  const name=props.name;
+  const trailerKey=props.trailerKey;
 
+  console.log(trailerKey);
+
+  const stateToPass = {
+    overview:overview,
+    year:year,
+    mediaType:mediaType,
+    poster:image,
+    name:name,
+    id:id,
+    trailerKey:trailerKey
+  }
+
+  console.log('in sliderCard ', stateToPass);
 
     return (
-     
+      <Link to={`/home/detail/${id}`} state={stateToPass}>
         <Container>
           <img src={props.bgImg}/>
         </Container>
+        </Link>
+     
      
     )
 }
