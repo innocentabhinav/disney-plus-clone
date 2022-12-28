@@ -1,32 +1,89 @@
-import React ,{useState}from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import DetailWrapper from './DetailWrapper';
+import Trailer from './Trailer';
 
 function Detail() {
 
-const {state}=useLocation();
-console.log(state);
-const year=state.year;
-const image=state.poster;
-const overview=state.overview;
-const mediaType=state?.mediaType;
-const name=state.name;
-const id=state.id;
+    const { state } = useLocation();
+    console.log(state);
+    const year = state.year;
+    const image = state.poster;
+    const overview = state.overview;
+    const mediaType = state.mediaType;
+    const name = state.name;
+    const id = state.id;
+    // console.log(mediaType);
+    const temp = state?.trailerKey;
 
-console.log(mediaType);
+    let movieKey;
 
-// const temp=state?.trailerKey;
+    const [trailer, setTrailer] = useState([])
+    const [playTrailer, setPlayTrailer] = useState(true)
+    const [trailerButtonText, setTrailerButtonText] = useState("TRAILER")
 
-const renderStuff =() =>{
-return (
-    <DetailWrapper
-    year={year}
-    mediaType={mediaType}
-    overview={overview}
-    />
-)
-}
+    useEffect(() => {
+        async function fetchTrailer() {
+            const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}/videos?api_key=20771c1b28c58de4f40a4f221be84f5a&language=en-US`)
+            const dataReceived = await response.json();
+            setTrailer(dataReceived.results);
+        }
+        fetchTrailer();
+    }, [])
+
+    //since above api was returning a lot of other similar videos so wrote a  
+    //condition to get the required video
+    const officialTrailer = trailer?.find((video) => video.name === "Official Trailer")
+    movieKey = officialTrailer?.key;
+
+    if (
+        (id == '1') ||
+        (id == '2') ||
+        (id == '3') ||
+        (id == '4')
+    ) {
+        movieKey = temp;
+    }
+
+    const trailerOnClickHandler = () => {
+     // here the state of the playTrailer is changed according to its previous state 
+     //basically applied inversion on prev
+
+        setPlayTrailer(prev => !prev)
+        if (playTrailer) {
+            setTrailerButtonText("OVERVIEW")
+        } else {
+            setTrailerButtonText("TRAILER")
+
+        }
+    }
+
+    const playOnClickHandler = () => {
+        alert('Illegal action, this is Clone Project. Click on trailer button to watch the trailer.')
+
+    }
+
+
+    const renderStuff = () => {
+        if (playTrailer) {
+            return (
+                <DetailWrapper
+                    year={year}
+                    mediaType={mediaType}
+                    overview={overview}
+                />
+            )
+
+        } else {
+            return (
+                <Trailer movieId={movieKey} />
+
+            )
+
+        }
+
+    }
 
     return (
         <Container>
@@ -41,14 +98,14 @@ return (
 
             <Controls>
 
-                <PlayButton >
+                <PlayButton onClick={playOnClickHandler}>
                     <img src="/images/play-button.png" alt="play-button" />
                     PLAY
                 </PlayButton>
 
-                <TrailerButton>
+                <TrailerButton onClick={trailerOnClickHandler}>
                     <img src="/images/play-button-white.png" alt="trailer-button" />
-                    TRAILER {/* {trailerButtonText} */}
+                     {trailerButtonText}
                 </TrailerButton>
 
                 <AddButton>
@@ -62,12 +119,12 @@ return (
             </Controls>
 
             <Wrapper>
-            { renderStuff ()}
+                {renderStuff()}
             </Wrapper>
 
             <PosterImage>
-            <img src={image}/>
-          </PosterImage>
+                <img src={image} />
+            </PosterImage>
 
 
         </Container>
@@ -182,7 +239,7 @@ const WatchInGroupButton = styled(AddButton)`
 background-color: rgba(0,0,0,0.78);
 
 `
-const PosterImage=styled.div`
+const PosterImage = styled.div`
 position: absolute;
 z-index: 5;
 width: 490px;
