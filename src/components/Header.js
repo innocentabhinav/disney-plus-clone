@@ -66,9 +66,9 @@ function Header() {
            
           
             <NavMenu>
-                <a>
+                <a >
                     <img src="/images/home-icon.svg" />
-                    <span>HOME</span>
+                    <span onClick={()=>navigate('/home')}>HOME</span>
                 </a>
 
                 <a>
